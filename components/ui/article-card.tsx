@@ -10,11 +10,18 @@ interface Props {
 
 export default function ArticleCard({ article, className }: Props) {
   return (
-    <Card className={cn('p-4', className)}>
-      <a href={article.link} className="font-semibold text-lg">
+    <div className={cn('rounded-lg border bg-white p-4 shadow-sm', className)}>
+      <a 
+        href={article.link} 
+        target="_blank" 
+        rel="noopener noreferrer"
+        className="font-semibold text-lg text-blue-600 hover:text-blue-800"
+      >
         {article.title}
       </a>
-      <p className="text-sm text-gray-500">{new Date(article.pubDate).toLocaleString()}</p>
-    </Card>
+      <p className="text-sm text-gray-500 mt-2">
+        {new Date(article.pubDate).toLocaleString()}
+      </p>
+    </div>
   )
 }

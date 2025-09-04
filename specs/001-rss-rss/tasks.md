@@ -44,7 +44,7 @@
 ## Phase 3.1: セットアップ
 - [ ] T001 Next.js プロジェクトを TypeScript と Tailwind CSS で初期化
 - [ ] T002 [P] shadcn/ui を必要なコンポーネント (card, button, scroll-area, separator) と共にインストール・設定
-- [ ] T003 [P] RSS 解析の依存関係をインストール (rss-parser, @types/rss-parser)
+- [ ] T003 [P] RSS 解析の依存関係をインストール (rss-parser)
 - [ ] T004 [P] Vitest と React Testing Library をテスト用に設定
 - [ ] T005 [P] API モック用に Mock Service Worker (msw) をインストール
 - [ ] T006 [P] ESLint と Prettier の設定
@@ -101,7 +101,7 @@
 ```bash
 # セットアップフェーズ - 同時実行可能:
 Task: "shadcn/ui を必要なコンポーネントと共にインストール・設定"
-Task: "RSS 解析の依存関係をインストール (rss-parser, @types/rss-parser)"
+Task: "RSS 解析の依存関係をインストール (rss-parser)"
 Task: "Vitest と React Testing Library をテスト用に設定"
 
 # テストフェーズ - 同時実行可能:

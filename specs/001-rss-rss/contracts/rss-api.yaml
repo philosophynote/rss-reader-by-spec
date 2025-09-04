@@ -1,0 +1,116 @@
+openapi: 3.0.0
+info:
+  title: RSS Reader API
+  version: 1.0.0
+  description: Internal API for fetching and parsing RSS feeds
+paths:
+  /api/rss:
+    get:
+      summary: Fetch RSS feed from ai-news.dev
+      description: Retrieves and parses RSS feed, returns structured article data
+      parameters:
+        - name: url
+          in: query
+          required: false
+          schema:
+            type: string
+            default: "https://ai-news.dev/feeds/"
+          description: RSS feed URL to fetch
+      responses:
+        '200':
+          description: Successfully parsed RSS feed
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RSSResponse'
+        '400':
+          description: Invalid RSS URL or malformed request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Server error or RSS feed unavailable
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+components:
+  schemas:
+    RSSResponse:
+      type: object
+      required:
+        - title
+        - description
+        - link
+        - lastBuildDate
+        - articles
+      properties:
+        title:
+          type: string
+          description: RSS feed title
+        description:
+          type: string
+          description: RSS feed description
+        link:
+          type: string
+          format: uri
+          description: RSS feed website URL
+        lastBuildDate:
+          type: string
+          format: date-time
+          description: Last update timestamp
+        articles:
+          type: array
+          items:
+            $ref: '#/components/schemas/Article'
+    
+    Article:
+      type: object
+      required:
+        - id
+        - title
+        - content
+        - link
+        - publishedAt
+      properties:
+        id:
+          type: string
+          description: Unique article identifier
+        title:
+          type: string
+          maxLength: 200
+          description: Article title
+        content:
+          type: string
+          maxLength: 2000
+          description: Article content/description
+        link:
+          type: string
+          format: uri
+          description: Original article URL
+        publishedAt:
+          type: string
+          format: date-time
+          description: Publication date
+        author:
+          type: string
+          maxLength: 100
+          description: Article author (optional)
+        imageUrl:
+          type: string
+          format: uri
+          description: Featured image URL (optional)
+    
+    Error:
+      type: object
+      required:
+        - message
+      properties:
+        message:
+          type: string
+          description: Human-readable error message
+        code:
+          type: string
+          description: Machine-readable error code

@@ -38,6 +38,10 @@
 - Server-side parsing for better performance
 - Cache control headers for optimization
 - Error handling on server side
+**Security**:
+- Allowlist: `ai-news.dev` のみ
+- Private IP/localhost/リンクローカル遮断、HTTPS限定、リダイレクト最大1回
+- 5sタイムアウト、本文2MB上限、Content-Typeは`application/xml`,`text/xml`に限定
 
 **Alternatives considered**:
 - Direct browser fetch - Blocked by CORS
@@ -61,6 +65,10 @@
 - Clear error messages for network issues
 - Retry mechanisms for temporary failures
 - Loading states for better UX
+
+**Implementation notes**:
+- Server: `AbortController`で5sタイムアウト、再試行は指数バックオフ最大2回（GETのみ）
+- Client: 429/5xxはユーザー通知＋再試行ボタン、4xxは説明文表示
 
 ## Testing Strategy
 

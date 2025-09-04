@@ -56,11 +56,15 @@
 - [ ] T009 [P] 記事一覧レンダリングの統合テストを `__tests__/integration/article-list.test.tsx` に作成
 - [ ] T010 [P] 記事詳細表示の統合テストを `__tests__/integration/article-detail.test.tsx` に作成
 - [ ] T011 [P] エラーハンドリングの統合テストを `__tests__/integration/error-handling.test.tsx` に作成
+- [ ] T011a [P] SSRF防止とURL検証のコントラクトテスト（http/httpsのみ、許可ドメイン方針の検証）
+- [ ] T011b [P] フェッチのタイムアウト/バックオフ/再試行の振る舞いテスト
 
 ## Phase 3.3: コア実装 (テスト失敗後のみ)
 - [ ] T012 [P] Article と RSSResponse の TypeScript インターフェースを `lib/types.ts` に作成
 - [ ] T013 [P] RSS 解析ユーティリティを `lib/rss-parser.ts` に作成
 - [ ] T014 RSS API エンドポイントを `app/api/rss/route.ts` に実装
+- [ ] T014a `url` クエリの厳格バリデーション（scheme/http(s), 長さ, 許可リスト）
+- [ ] T014b フェッチの `AbortController` によるタイムアウトと指数バックオフ
 - [ ] T015 [P] ArticleCard コンポーネントを `components/ui/article-card.tsx` に作成
 - [ ] T016 [P] ArticleList コンポーネントを `components/ui/article-list.tsx` に作成
 - [ ] T017 [P] ArticleDetail コンポーネントを `components/ui/article-detail.tsx` に作成
@@ -69,7 +73,7 @@
 
 ## Phase 3.4: 統合機能
 - [ ] T020 ArticleList コンポーネントにローディング状態を追加
-- [ ] T021 RSS API にエラーハンドリングとリトライロジックを実装
+- [ ] T021 RSS API にエラーハンドリングとリトライ/サーキットブレーカを実装
 - [ ] T022 全コンポーネントにレスポンシブデザインを追加
 - [ ] T023 記事詳細モーダルまたはナビゲーションを実装
 - [ ] T024 パフォーマンス最適化を追加 (遅延読み込み、ページネーション)

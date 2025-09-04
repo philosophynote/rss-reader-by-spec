@@ -3,6 +3,8 @@ info:
   title: RSS Reader API
   version: 1.0.0
   description: Internal API for fetching and parsing RSS feeds
+security:
+  - InternalApiKey: []
 paths:
   /api/rss:
     get:
@@ -14,7 +16,11 @@ paths:
           required: false
           schema:
             type: string
+            format: uri
+            maxLength: 2048
+            pattern: '^https?:\/\/'
             default: "https://ai-news.dev/feeds/"
+            example: "https://ai-news.dev/feeds/"
           description: RSS feed URL to fetch
       responses:
         '200':
@@ -37,6 +43,11 @@ paths:
                 $ref: '#/components/schemas/Error'
 
 components:
+  securitySchemes:
+    InternalApiKey:
+      type: apiKey
+      in: header
+      name: X-Internal-Token
   schemas:
     RSSResponse:
       type: object
@@ -63,6 +74,8 @@ components:
           description: Last update timestamp
         articles:
           type: array
+          minItems: 0
+          maxItems: 100
           items:
             $ref: '#/components/schemas/Article'
     

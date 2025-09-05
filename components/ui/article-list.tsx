@@ -3,6 +3,7 @@
 import * as React from 'react'
 import type { Article } from '@/lib/types'
 import ArticleCard from './article-card'
+import { Button } from './button'
 
 interface Props {
   articles: Article[]
@@ -29,12 +30,12 @@ export default function ArticleList({ articles, isLoading = false, onSelect }: P
         />
       ))}
       {visible < articles.length && (
-        <button
-          className="col-span-full rounded bg-blue-500 px-4 py-2 text-white"
+        <Button
+          className="col-span-full"
           onClick={() => setVisible((v) => v + 10)}
         >
           Load more
-        </button>
+        </Button>
       )}
     </div>
   )

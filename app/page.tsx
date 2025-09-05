@@ -1,17 +1,18 @@
+"use client"
 import ErrorBoundary from '@/components/ui/error-boundary'
 import ArticleList from '@/components/ui/article-list'
 import ArticleModal from '@/components/ui/article-modal'
 import type { Article } from '@/lib/types'
 import { useState, useEffect } from 'react'
 
-export function PageClient({ initialArticles = [] }: { initialArticles?: Article[] }) {
-  'use client'
-  const [articles, setArticles] = useState<Article[]>(initialArticles)
+export function PageClient({ initialArticles }: { initialArticles?: Article[] }) {
+  // Initialize from provided articles, defaulting to a stable empty array
+  const [articles, setArticles] = useState<Article[]>(initialArticles ?? [])
   const [loading, setLoading] = useState(true)
   const [selected, setSelected] = useState<Article | null>(null)
 
   useEffect(() => {
-    if (initialArticles.length > 0) {
+    if (initialArticles && initialArticles.length > 0) {
       setArticles(initialArticles);
       setLoading(false);
       return;

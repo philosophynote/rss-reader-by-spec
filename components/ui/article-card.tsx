@@ -1,24 +1,25 @@
 import * as React from 'react'
 import type { Article } from '@/lib/types'
-import { Card } from './card'
 import { cn } from '@/lib/utils'
 
 interface Props {
   article: Article
   className?: string
+  onClick?: () => void
 }
 
-export default function ArticleCard({ article, className }: Props) {
+export default function ArticleCard({ article, className, onClick }: Props) {
   return (
-    <div className={cn('rounded-lg border bg-white p-4 shadow-sm', className)}>
-      <a 
-        href={article.link} 
-        target="_blank" 
-        rel="noopener noreferrer"
-        className="font-semibold text-lg text-blue-600 hover:text-blue-800"
-      >
+    <div
+      className={cn(
+        'cursor-pointer rounded-lg border bg-white p-4 sm:p-6 shadow-sm',
+        className
+      )}
+      onClick={onClick}
+    >
+      <h3 className="font-semibold text-lg sm:text-xl text-blue-600 hover:text-blue-800">
         {article.title}
-      </a>
+      </h3>
       <p className="text-sm text-gray-500 mt-2">
         {new Date(article.pubDate).toLocaleString()}
       </p>

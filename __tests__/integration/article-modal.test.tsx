@@ -1,7 +1,7 @@
 import React from 'react'
 import { describe, it, expect } from 'vitest'
 import { render, screen, fireEvent } from '@testing-library/react'
-import { PageClient } from '../../app/page'
+import PageClient from '../../components/page-client'
 
 const articles = [
   { title: 'Hello', link: '#', pubDate: '2024-01-01', content: 'Detail content' }
